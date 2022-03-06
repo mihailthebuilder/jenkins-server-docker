@@ -30,7 +30,34 @@ Run above image as container:
 ./jenkins_startup.sh
 ```
 
-Congrats, you have the Jenkins server now started up!
+Now we need to set up an SSH connection from the Jenkins server container to your GitHub account. First we CLI into your container:
+```
+docker exec -it jenkins-blueocean bash
+```
+
+Generate SSH key:
+```
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+Add SSH key to ssh-agent:
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+Add SSH key to GitHub account - here's [the official guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+Test your SSH connection:
+```
+ssh -T git@github.com
+```
+
+You may see a warning; check the RSA fingerprint matches that in the SSH key you generated, then enter `yes`. You should now get a successful-authentication message. 
+
+When setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
+
+Congrats, you now have a Jenkins server running locally, which is connected to your remote repo!
 
 # Notes
 
@@ -49,7 +76,3 @@ This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for us
 > However, with the above approach, all these Dockers use one and the same Docker daemon, and all the difficulties of multiple daemons (in this case three) on the same system, that would otherwise occur, are bypassed.
 
 Apparently it's [not safe](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) and you should use Docker sockets.
-
-## Connecting Jenkins server to GitHub
-
-Easiest way is to CLI into your Jenkins container and generate an SSH key which you add to your GitHub account. Then, when setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
