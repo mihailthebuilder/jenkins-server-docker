@@ -15,7 +15,7 @@ This might've been created already, you can check for it with this command:
 docker network ls
 ```
 
-Run the Docker-in-Docker (dind) image (see notes for more):
+Run the Docker-in-Docker image ([see notes](#about-docker-in-docker-dind) for more):
 ```
 ./dind_startup.sh
 ```
@@ -32,9 +32,13 @@ Run above image as container:
 
 Congrats, you have the Jenkins server now started up!
 
-# Notes
+# If you lose your admin password
 
-This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for using dind, but I don't fully understand it yet:
+Easiest way is to remove all containers and volumes related to the server and start afresh. In Windows, you can do that from the Docker GUI.
+
+# About Docker-in-Docker (DinD)
+
+This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for using DinD, but I don't fully understand it yet:
 
 > In Jenkins, all the commands in the stages of your pipeline are executed on the agent that you specify. This agent can be a Docker container. So, if one of your commands, for example, in the Build stage, is a Docker command (for example, for building an image), then you have the case that you need to run a Docker command within a Docker container.
 >
@@ -43,5 +47,3 @@ This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for us
 > However, with the above approach, all these Dockers use one and the same Docker daemon, and all the difficulties of multiple daemons (in this case three) on the same system, that would otherwise occur, are bypassed.
 
 Apparently it's [not safe](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) and you should use Docker sockets.
-
-
