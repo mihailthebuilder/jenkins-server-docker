@@ -20,6 +20,16 @@ Run the Docker-in-Docker (dind) image (see notes for more):
 ./dind_startup.sh
 ```
 
+Build docker image for Jenkins server from the `Dockerfile`:
+```
+docker build -t myjenkins-blueocean:2.319.3-1 .
+```
+
+Run above image as container:
+```
+./jenkins_startup.sh
+```
+
 # Notes
 
 This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for using dind, but I don't fully understand it yet:
