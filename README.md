@@ -32,11 +32,13 @@ Run above image as container:
 
 Congrats, you have the Jenkins server now started up!
 
-# If you lose your admin password
+# Notes
+
+## If you lose your admin password
 
 Easiest way is to remove all containers and volumes related to the server and start afresh. In Windows, you can do that from the Docker GUI.
 
-# About Docker-in-Docker (DinD)
+## About Docker-in-Docker (DinD)
 
 This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for using DinD, but I don't fully understand it yet:
 
@@ -47,3 +49,7 @@ This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for us
 > However, with the above approach, all these Dockers use one and the same Docker daemon, and all the difficulties of multiple daemons (in this case three) on the same system, that would otherwise occur, are bypassed.
 
 Apparently it's [not safe](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) and you should use Docker sockets.
+
+## Connecting Jenkins server to GitHub
+
+Easiest way is to CLI into your Jenkins container and generate an SSH key which you add to your GitHub account. Then, when setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
