@@ -30,6 +30,8 @@ Run above image as container:
 ./jenkins_startup.sh
 ```
 
+Congrats, you have the Jenkins server now started up!
+
 # Notes
 
 This is [a reason](https://itnext.io/docker-in-docker-521958d34efd) given for using dind, but I don't fully understand it yet:
