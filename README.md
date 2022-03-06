@@ -1,8 +1,10 @@
 # Jenkins Local Server in Docker
 
-Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-wizard)
+Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-wizard). This was set up for Windows, but there's a guide for Linux as well.
 
 # Instructions
+
+**Open the command prompt.**
 
 Create bridge network in Docker:
 
@@ -35,7 +37,12 @@ Now we need to set up an SSH connection from the Jenkins server container to you
 docker exec -it jenkins-blueocean bash
 ```
 
-Generate SSH key:
+Check if you have an SSH key:
+```
+ls -al ~/.ssh
+```
+
+If you do, skip to adding the key to your GitHub account. If not, generate the key:
 ```
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
@@ -53,7 +60,7 @@ Test your SSH connection:
 ssh -T git@github.com
 ```
 
-You may see a warning; check the RSA fingerprint matches that in the SSH key you generated, then enter `yes`. You should now get a successful-authentication message. 
+You'll probably see a warning; check the SSH key fingerprint matches that of [GitHub's](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints), then enter `yes`. You should now get a successful-authentication message. 
 
 When setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
 
