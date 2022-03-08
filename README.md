@@ -19,7 +19,7 @@ docker network ls
 
 Run the Docker-in-Docker image ([see notes](#about-docker-in-docker-dind) for more):
 ```
-./dind_startup.sh
+./dind.bat
 ```
 
 Build docker image for Jenkins server from the `Dockerfile`:
@@ -29,7 +29,7 @@ docker build -t myjenkins-blueocean:2.319.3-1 .
 
 Run above image as container:
 ```
-./jenkins_startup.sh
+./jenkins.bat
 ```
 
 Now we need to set up an SSH connection from the Jenkins server container to your GitHub account. First we CLI into your container:
