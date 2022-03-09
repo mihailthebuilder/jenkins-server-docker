@@ -2,7 +2,7 @@
 
 Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-wizard). This was set up for Windows, but there's a guide for Linux as well.
 
-# Instructions
+# Installation
 
 **Open the command prompt.**
 
@@ -19,7 +19,7 @@ docker network ls
 
 Run the Docker-in-Docker image ([see notes](#about-docker-in-docker-dind) for more):
 ```
-./dind.bat
+dind.bat
 ```
 
 Build docker image for Jenkins server from the `Dockerfile`:
@@ -29,7 +29,7 @@ docker build -t myjenkins-blueocean:2.319.3-1 .
 
 Run above image as container:
 ```
-./jenkins.bat
+jenkins.bat
 ```
 
 Now we need to set up an SSH connection from the Jenkins server container to your GitHub account. First we CLI into your container:
@@ -64,7 +64,13 @@ You'll probably see a warning; check the SSH key fingerprint matches that of [Gi
 
 When setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
 
-Congrats, you now have a Jenkins server running locally, which is connected to your remote repo!
+# Starting after installation
+
+After you've installed the server, the next time all you need to do is run these 2 files:
+```
+dind.bat
+jenkins.bat
+```
 
 # Notes
 
