@@ -1,7 +1,18 @@
 # Jenkins Local Server in Docker
 
 Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-wizard). This was set up for Windows, but there's a guide for Linux as well.
-
+# Table of contents
+- [Jenkins Local Server in Docker](#jenkins-local-server-in-docker)
+- [Table of contents](#table-of-contents)
+- [Installation](#installation)
+  - [Launch Docker server](#launch-docker-server)
+  - [Set up AWS connection](#set-up-aws-connection)
+  - [Set up GitHub connection](#set-up-github-connection)
+- [Starting after installation](#starting-after-installation)
+- [TODO](#todo)
+- [Notes](#notes)
+  - [If you lose your admin password](#if-you-lose-your-admin-password)
+  - [About Docker-in-Docker (DinD)](#about-docker-in-docker-dind)
 # Installation
 
 ## Launch Docker server
