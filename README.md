@@ -4,9 +4,9 @@ Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-w
 
 # Installation
 
-**Open the command prompt.**
+## Launch Docker server
 
-Create bridge network in Docker:
+Open the **comand prompt** and create a bridge network in Docker:
 
 ```
 docker network create jenkins
@@ -32,12 +32,34 @@ Run above image as container:
 jenkins.bat
 ```
 
-Now we need to set up an SSH connection from the Jenkins server container to your GitHub account. First we CLI into your container:
+## Set up AWS connection
+
+Start by copying the `aws-adfs-cli` package from your local folder into the container:
 ```
-docker exec -it jenkins-blueocean bash
+docker cp aws-adfs-cli/ jenkins-blueocean:/
 ```
 
-Check if you have an SSH key:
+Then CLI into your container with root access:
+```
+docker exec -u 0 -it jenkins-blueocean bash
+```
+
+`cd` into the directory and get bash to understand the `install.sh` script. Then run it:
+```
+cd aws-adfs-cli
+sed -i -e 's/\r$//' install.sh
+./install.sh
+```
+
+Then get bash to understand the `aws-adfs` script and run it to log into AWS:
+```
+sed -i -e 's/\r$//' aws-adfs
+./aws-adfs
+```
+
+## Set up GitHub connection
+
+We want to fetch the repo that's stored remotely on your GitHub account, so we'll need to set up an SSH connection from the Jenkins server to that account. In the container CLI, check if you have an SSH key:
 ```
 ls -al ~/.ssh
 ```
@@ -66,11 +88,21 @@ When setting up the pipeline, add the remote repo as a source using the `Git` op
 
 # Starting after installation
 
-After you've installed the server, the next time all you need to do is run these 2 files:
+After you've installed the server, you'll need to run these 2 files to start the server:
 ```
 dind.bat
 jenkins.bat
 ```
+
+And you'll need to CLI into the Jenkins server container and log into AWS as per the [above instructions](#set-up-aws-connection).
+
+# TODO
+
+Figure out how to automate any of the above setups.
+
+Rename containers to something more easily memorable.
+
+Figure out how to use Docker sockets - [see why](#about-docker-in-docker-dind).
 
 # Notes
 
