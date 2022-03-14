@@ -3,6 +3,7 @@ docker run --name jenkins-blueocean --rm --detach ^
   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 ^
   --volume jenkins-data:/var/jenkins_home ^
   --volume jenkins-docker-certs:/certs/client:ro ^
-  --volume aws-adfs-cli:/aws-adfs-cli ^
+  --volume aws-adfs-cli-install-kit:/aws-adfs-cli ^
   --volume aws-certs:/.aws ^
+  --volume aws-adfs-cli:/usr/local/bin ^
   --publish 30303:8080 --publish 50000:50000 myjenkins-blueocean:2.319.3-1
