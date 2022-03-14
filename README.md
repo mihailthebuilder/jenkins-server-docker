@@ -55,17 +55,17 @@ Then CLI into your container with root access:
 docker exec -u 0 -it jenkins-blueocean bash
 ```
 
-`cd` into the directory and get bash to understand the `install.sh` script. Then run it:
+`cd` into the directory and get bash to understand the `install.sh` and `aws-adfs` scripts. Then install the AWS utility:
 ```
 cd aws-adfs-cli
 sed -i -e 's/\r$//' install.sh
+sed -i -e 's/\r$//' aws-adfs
 ./install.sh
 ```
 
-Then get bash to understand the `aws-adfs` script and run it to log into AWS:
+Now you can log into AWS using just this simple command:
 ```
-sed -i -e 's/\r$//' aws-adfs
-./aws-adfs
+aws-adfs
 ```
 
 ## Set up GitHub connection
@@ -110,6 +110,7 @@ And you'll need to CLI into the Jenkins server container and log into AWS as per
 # TODO
 
 Figure out how to automate any of the above setups.
+- I tried doing it for the [AWS install](#set-up-aws-connection) step, but I got into an error running `docker exec` command. I gave up because I only need to do it once.
 
 Rename containers to something more easily memorable.
 

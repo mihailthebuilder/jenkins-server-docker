@@ -5,5 +5,5 @@ docker run --name jenkins-blueocean --rm --detach ^
   --volume jenkins-docker-certs:/certs/client:ro ^
   --volume aws-adfs-cli-install-kit:/aws-adfs-cli ^
   --volume aws-certs:/.aws ^
-  --volume aws-adfs-cli:/usr/local/bin ^
+  --volume aws-adfs-cli:/usr/local ^
   --publish 30303:8080 --publish 50000:50000 myjenkins-blueocean:2.319.3-1
