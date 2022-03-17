@@ -68,7 +68,7 @@ Now you can log into AWS with this command:
 aws-adfs
 ```
 
-But the `.aws` credentials folder gets created in the `root` directory, which the Jenkins runner doesn't have access to. So you need to copy the folder to `jenkins_home`:
+But the `.aws` credentials folder gets created in the `root` directory, which the Jenkins runner doesn't have access to. The runner actually assumes that the `root` directory is in `/var/jenkins_home`, so you need to copy the `aws` folder there.
 ```
 cp -r /root/.aws /var/jenkins_home/
 ```
