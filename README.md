@@ -47,7 +47,7 @@ jenkins.bat
 
 Start by copying the `aws-adfs-cli` package from your local folder into the container:
 ```
-docker cp aws-adfs-cli/ jenkins-blueocean:/
+docker cp aws-adfs-cli/ jenkins-blueocean:/var/jenkins_home/
 ```
 
 Then CLI into your container with root access:
@@ -57,15 +57,20 @@ docker exec -u 0 -it jenkins-blueocean bash
 
 `cd` into the directory and get bash to understand the `install.sh` and `aws-adfs` scripts. Then install the AWS utility:
 ```
-cd aws-adfs-cli
+cd /var/jenkins_home/aws-adfs-cli
 sed -i -e 's/\r$//' install.sh
 sed -i -e 's/\r$//' aws-adfs
 ./install.sh
 ```
 
-Now you can log into AWS using just this simple command:
+Now you can log into AWS with this command:
 ```
 aws-adfs
+```
+
+But the `.aws` credentials folder gets created in the `root` directory, which the Jenkins runner doesn't have access to. So you need to copy the folder to `jenkins_home`:
+```
+cp -r /root/.aws /var/jenkins_home/
 ```
 
 ## Set up GitHub connection
