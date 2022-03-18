@@ -12,6 +12,7 @@ Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-w
 - [TODO](#todo)
 - [Notes](#notes)
   - [If you lose your admin password](#if-you-lose-your-admin-password)
+  - [aws-adfs setup](#aws-adfs-setup)
   - [About Docker-in-Docker (DinD)](#about-docker-in-docker-dind)
 # Installation
 
@@ -47,7 +48,7 @@ jenkins.bat
 
 Start by copying the `aws-adfs-cli` package from your local folder into the container:
 ```
-docker cp aws-adfs-cli/ jenkins-blueocean:/var/jenkins_home/
+docker cp ../aws-adfs-cli-jenkins/ jenkins-blueocean:/var/jenkins_home/
 ```
 
 Then CLI into your container with root access:
@@ -57,7 +58,7 @@ docker exec -u 0 -it jenkins-blueocean bash
 
 `cd` into the directory and get bash to understand the `install.sh` and `aws-adfs` scripts. Then install the AWS utility:
 ```
-cd /var/jenkins_home/aws-adfs-cli
+cd /var/jenkins_home/aws-adfs-cli-jenkins
 sed -i -e 's/\r$//' install.sh
 sed -i -e 's/\r$//' aws-adfs
 ./install.sh
@@ -66,11 +67,6 @@ sed -i -e 's/\r$//' aws-adfs
 Now you can log into AWS with this command:
 ```
 aws-adfs
-```
-
-But the `.aws` credentials folder gets created in the `root` directory, which the Jenkins runner doesn't have access to. The runner actually assumes that the `root` directory is in `/var/jenkins_home`, so you need to copy the `aws` folder there.
-```
-cp -r /root/.aws /var/jenkins_home/
 ```
 
 ## Set up GitHub connection
@@ -126,6 +122,12 @@ Figure out how to use Docker sockets - [see why](#about-docker-in-docker-dind).
 ## If you lose your admin password
 
 Easiest way is to remove all containers and volumes related to the server and start afresh. In Windows, you can do that from the Docker GUI.
+
+## aws-adfs setup
+
+I've made some changes to the `aws-adfs` utility so that it copies the `.aws` directory into `/var/jenkins_home/`. This way, the Jenkins job can access it.
+
+I also turned the `/usr/local/bin` directory into a volume as that's where `aws-adfs` stores the executable.
 
 ## About Docker-in-Docker (DinD)
 
