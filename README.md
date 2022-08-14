@@ -10,7 +10,7 @@ Followed [this guide](https://www.jenkins.io/doc/book/installing/docker/#setup-w
     - [Launch Docker server](#launch-docker-server)
     - [Set up AWS connection](#set-up-aws-connection)
     - [Set up GitHub connection](#set-up-github-connection)
-  - [Starting after installation](#starting-after-installation)
+    - [Starting after installation](#starting-after-installation)
   - [TODO](#todo)
   - [Notes](#notes)
     - [If you lose your admin password](#if-you-lose-your-admin-password)
@@ -113,7 +113,7 @@ You'll probably see a warning; check the SSH key fingerprint matches that of [Gi
 
 When setting up the pipeline, add the remote repo as a source using the `Git` option without any credentials.
 
-## Starting after installation
+### Starting after installation
 
 After you've installed the server, you'll need to run these 2 files to start the server:
 
